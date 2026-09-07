@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-start mb-3 gap-2">
+    <h3>Tramites</h3>
+    <button class="btn btn-outline-success" (click)="nuevoTramite()">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+</div>
+<tabla-tramite [tramites]="tramiteService.tramites()" 
+(idTramiteEliminar)="eliminarTramite($event)"></tabla-tramite>
+<paginador (actualizarEstado)="obtenerTramites()"></paginador>

@@ -1,0 +1,28 @@
+<nav aria-label="Paginador" class="paginador">
+    <div class="">
+        <!-- <span>Registro por pagina:</span> -->
+        <select class="form-select" [value]="paginacionService.tamanioPagina()" (change)="cambiarTamanioPagina($event)">
+            <option [value]="5">5</option>
+            <option [value]="10">10</option>
+            <option [value]="20">20</option>
+            <option [value]="50">50</option>
+        </select>
+    </div>
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" (click)="anterior()" [class.disabled]="paginacionService.primeraPagina()">Anterior</a>
+        </li>
+        @for(pag of paginacionService.paginas(); track pag){
+        <li class="page-item">
+            <a class="page-link" [class.active]="paginacionService.paginaActual() === pag"
+                (click)="irAPagina(pag)">{{pag+1}}</a>
+        </li>
+        }
+        <li class="page-item">
+            <a class="page-link" (click)="siguiente()" [class.disabled]="paginacionService.ultimaPagina()">Siguiente</a>
+        </li>
+    </ul>
+    <span>Total de registros: {{paginacionService.totalRegistros()}}</span>
+
+
+</nav>

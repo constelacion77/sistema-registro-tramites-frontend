@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-start mb-3 gap-2">
+    <h3>Documentos</h3>
+    <button class="btn btn-outline-success" (click)="nuevoDocumento()"><i class="bi bi-plus-lg"></i></button>
+</div>
+<tabla-documentos [documentos]="documentosService.documentos()"
+                    (idDocumentoEliminar)="eliminarDocumento($event)"></tabla-documentos>
+@if(paginacionService.paginas().length > 0){
+    <paginador (actualizarEstado)="cargarDocumentos()"></paginador>
+}

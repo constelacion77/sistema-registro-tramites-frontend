@@ -1,0 +1,11 @@
+<select 
+    class="form-select"
+    name="idDocumento"
+    (change)="seleccionarDocumento($event)">
+    <option [value]="0">Seleccione un documento</option>
+    @for(doc of documentos(); track doc.id){
+        <option [value]="doc.id">
+            {{doc.nombre}}
+        </option>
+    }
+</select>

@@ -1,0 +1,18 @@
+<div #offcanvasNuevoBeneficiario class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNuevoBeneficiario" aria-labelledby="offcanvasNuevoBeneficiarioLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNuevoBeneficiarioLabel">Nuevo beneficiario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="w-100">
+                    <formulario-beneficiario [beneficiario]="nuevoBeneficiario()"
+                    (beneficiarioOutput)="guardarBeneficiario($event)"
+                    (cancelarEvent)="cerrarOfcanvas()"
+                    ></formulario-beneficiario>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<select
+    class="form-select"
+    name="beneficiario"
+    (change)="seleccionarBeneficiario($event)"
+>
+    <option [value]="0">Seleccione un beneficiario</option>
+    @for(bene of beneficiarios(); track bene.id){
+        <option [value]="bene.id">
+            {{bene.nombre}} {{bene.apellidos}}
+        </option>
+    }    
+</select>

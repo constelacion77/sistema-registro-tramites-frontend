@@ -1,0 +1,60 @@
+<form [formGroup]="formDocumento">
+    <div class="row g-3 mb-3">
+        <div class="col">
+            <label for="nombreDocumento" class="lead">Nombre:</label>
+            <input type="text" class="form-control" formControlName="nombre" name="nombreDocumento" [class.is-invalid]="
+                            formDocumento.controls.nombre.invalid &&
+                            formDocumento.controls.nombre.touched" />
+            <div class="invalid-feedback">
+                @if(formDocumento.controls.nombre.errors?.['required']){
+                <div>El nombre es obligatorio.</div>
+                }
+                @if(formDocumento.controls.nombre.errors?.['minLenght']){
+                <div>Debe tener al menos 4 caracteres.</div>
+                }
+                @if(formDocumento.controls.nombre.errors?.['maxLenght']){
+                <div>No debe tener más de 150 caracteres.</div>
+                }
+            </div>
+        </div>
+        <div class="col">
+            <label class="lead" for="costoDocumento">Costo:</label>
+            <input type="number" class="form-control" formControlName="costo" name="costoDocumento" [class.is-invalid]="
+                            formDocumento.controls.costo.invalid &&
+                            formDocumento.controls.costo.touched 
+                        " />
+            <div class="invalid-feedback">
+                @if(formDocumento.controls.costo.errors?.['required']){
+                <div>El costo es obligatorio.</div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="lead" for="descripcionDocumento">Descripción:</label>
+        <textarea class="form-control" formControlName="descripcion" name="descripcionDocumento" [class.is-invalid]="
+                        formDocumento.controls.descripcion.invalid &&
+                        formDocumento.controls.descripcion.touched
+                    "></textarea>
+        <div class="invalid-feedback">
+            @if(formDocumento.controls.descripcion.errors?.['maxLenght']){
+            <div>No debe contener más de 200 caracteres.</div>
+            }
+        </div>
+    </div>
+    @if(documento().id){
+        <div class="mb-3">
+            <div class="form-check form-switch">
+                <label class="lead" for="activoDocumento">
+                    Activo
+                </label>
+                <input class="form-check-input form-control" type="checkbox" role="switch" formControlName="activo"
+                    name="activoDocumento" id="activoDocumento">
+            </div>
+        </div>
+    }
+    <div class="d-grid d-md-flex gap-3 justify-content-center">
+        <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="validarDocumento()">Guardar</button>
+    </div>
+</form>

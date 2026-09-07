@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-start mb-3 gap-2">
+    <h3>Beneficiarios</h3>
+    <button type="button" class="btn btn-outline-success" (click)="nuevoBeneficiario()">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+</div>
+<tabla-beneficiario [beneficiarios]="beneficiarioService.beneficiarios()"
+                    (idBeneficiarioEliminar)="eliminarBeneficiario($event)"></tabla-beneficiario>
+<paginador (actualizarEstado)="obtenerBeneficiarios()"></paginador>

@@ -1,0 +1,57 @@
+
+            <form [formGroup]="formBeneficiario">
+                <div class="row g-3 mb-3">
+                    <div class="col">
+                        <label for="nombreDocumento" class="lead">Nombre:</label>
+                        <input type="text" class="form-control" formControlName="nombre" name="nombreDocumento"
+                        [class.is-invalid]="
+                            formBeneficiario.controls.nombre.invalid &&
+                            formBeneficiario.controls.nombre.touched"
+                        />
+                        <div class="invalid-feedback">
+                            @if(formBeneficiario.controls.nombre.errors?.['required']){
+                                <div>El nombre es obligatorio.</div>
+                            }
+                            @if(formBeneficiario.controls.nombre.errors?.['minLenght']){
+                                <div>Debe tener al menos 3 caracteres.</div>
+                            }
+                            @if(formBeneficiario.controls.nombre.errors?.['maxLenght']){
+                                <div>No debe tener más de 100 caracteres.</div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label class="lead" for="apellidosBeneficiario">Apellidos:</label>
+                        <input type="text" class="form-control" formControlName="apellidos" name="apellidosBeneficiario"
+                        [class.is-invalid]="
+                            formBeneficiario.controls.apellidos.invalid &&
+                            formBeneficiario.controls.apellidos.touched 
+                        "/>
+                        <div class="invalid-feedback">
+                        @if(formBeneficiario.controls.apellidos.errors?.['maxLenght']){
+                            <div>No debe contener más de 150 caracteres.</div>
+                        }
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="lead" for="curpBeneficiario">CURP:</label>
+                    <input type="text" class="form-control" formControlName="curp" name="curpBeneficiario"
+                    [class.is-invalid]="
+                        formBeneficiario.controls.curp.invalid &&
+                        formBeneficiario.controls.curp.touched
+                    "/>
+                    <div class="invalid-feedback">
+                        @if(formBeneficiario.controls.curp.errors?.['required']){
+                            <div>La CURP es obligatoria.</div>
+                        }
+                        @if(formBeneficiario.controls.curp.errors?.['maxLength']){
+                            <div>La CURP debe contener máximo 18 caracteres.</div>
+                        }
+                    </div>
+                </div>
+                <div class="d-grid d-md-flex gap-3 justify-content-center">
+                    <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="validarBeneficario()">Guardar</button>
+                </div>
+            </form>

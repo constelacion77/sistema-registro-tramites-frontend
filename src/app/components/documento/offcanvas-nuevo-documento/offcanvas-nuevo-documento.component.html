@@ -1,0 +1,18 @@
+<div #offcanvasNuevoDocumento class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNuevoDocumento" aria-labelledby="offcanvasNuevoDocumentoLabel"
+data-bs-backdrop="false">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNuevoDocumentoLabel">Nuevo documento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="w-100">
+                    <formulario-documento [documento]="nuevoDocumento()"
+                        (documentoOutput)="guardarNuevoDocumento($event)"
+                        (cancelarEvent)="cancelar()"></formulario-documento>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.pagination .page-item .page-link.active{
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.pagination .page-item .page-link{
+    background-color: aliceblue;
+    color: black;
+}
+
+.pagination .page-item .page-link.disabled{
+    background-color: #80808000;
+    color: darkgray;
+}
+
+.pagination .page-item .page-link:hover{
+    background-color: black;
+    color: white;
+}
+
+.paginador{
+    display: flex;
+    justify-content: space-between;
+}

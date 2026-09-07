@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-10 col-lg-8">
+            <form [formGroup]="formTramite">
+                <div class="row g-3 mb-3">
+                    <div class="col">
+                        <div class="d-flex justify-content-between align-items-center gap-2">
+                            <label for="documentoTramite" class="lead">Documento:</label>
+                            <a class="link-success link-underline link-underline-opacity-0 link-opacity-50-hover"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasNuevoDocumento"
+                                aria-controls="offcanvasNuevoDocumento" href="#" title="Nuevo documento">
+                                Nuevo
+                            </a>
+                        </div>
+                        <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNuevoDocumento" aria-controls="offcanvasNuevoDocumento">
+                            <i class="bi bi-plus"></i>
+                        </button> -->
+                        <select class="form-select form-control" name="documentoTramite" [class.is-invalid]="
+                                formTramite.controls.idDocumento.invalid &&
+                                formTramite.controls.idDocumento.touched" formControlName="idDocumento">
+                            <option [ngValue]="0">Seleccione un documento</option>
+                            @for(doc of opcionesDocumento(); track doc.id){
+                            <option [ngValue]="doc.id">
+                                {{doc.nombre}}
+                            </option>
+                            }
+                        </select>
+                        <div class="invalid-feedback">
+                            @if(formTramite.controls.idDocumento.errors?.['min']){
+                            <div>El documento es obligatorio.</div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label for="beneficiarioTramite" class="lead">Beneficiario:</label>
+                            <a class="link-success link-underline link-underline-opacity-0 link-opacity-50-hover"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasNuevoBeneficiario"
+                                aria-controls="offcanvasNuevoBeneficiario" href="#" title="Nuevo beneficiario">
+                                Nuevo
+                            </a>
+                        </div>
+                        <select class="form-select" name="beneficiarioTramite" formControlName="idBeneficiario"
+                            [class.is-invalid]="
+                            formTramite.controls.idBeneficiario.invalid &&
+                            formTramite.controls.idBeneficiario.touched">
+                            <option [ngValue]="0">Seleccione un beneficiario</option>
+                            @for(bene of opcionesBeneficiario(); track bene.id){
+                            <option [ngValue]="bene.id">
+                                {{bene.nombre}}
+                            </option>
+                            }
+                        </select>
+                        <div class="invalid-feedback">
+                            @if(formTramite.controls.idBeneficiario.errors?.['min']){
+                            <div>El beneficiario es obligatorio.</div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col">
+                        <label class="lead" for="folioTramite">Folio:</label>
+                        <input type="text" class="form-control" formControlName="folio" name="folioTramite"
+                            [class.is-invalid]="
+                            formTramite.controls.folio.invalid &&
+                            formTramite.controls.folio.touched
+                        " />
+                        <div class="invalid-feedback">
+                            @if(formTramite.controls.folio.errors?.['maxLength']){
+                            <div>El folio debe contener máximo 45 caracteres.</div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="honorariosTramite" class="lead">Honorarios:</label>
+                        <input type="number" class="form-control" formControlName="honorarios"
+                            name="honorariosTramite" />
+                    </div>
+                </div>
+                <div class="d-grid d-md-flex gap-3 justify-content-center">
+                    <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="validarTramite()">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<offcanvas-nuevo-documento (idDocumento)="actualizarDocumento($event)"></offcanvas-nuevo-documento>
+<offcanvas-nuevo-beneficiario (idBeneficiario)="actualizarBeneficiario($event)"></offcanvas-nuevo-beneficiario>

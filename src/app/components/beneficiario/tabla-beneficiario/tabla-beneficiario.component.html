@@ -1,0 +1,38 @@
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>CURP</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody class="table-light">
+        @for(bene of beneficiarios(); track bene.id) {
+            <tr>
+                <th>{{bene.nombre}}</th>
+                <th>{{bene.apellidos}}</th>
+                <th>{{bene.curp}}</th>
+                <th>
+                    <div class="d-grid d-md-flex justify-content-start gap-2">
+                        <button type="button" (click)="editarBeneficiario(bene.id)"
+                        class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#confirmDialog" (click)="idBeneficiario.set(bene.id)"
+                        class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                    </div>
+                </th>
+            </tr>
+        }@empty{
+            <tr>
+                <td class="text-center" colspan="4">
+                    No hay beneficiarios para mostrar.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<confirm-dialog
+    [titulo]="'Eliminar'"
+    [mensaje]="'¿Estás seguro de eliminar este beneficiario?'"
+    (confirmation)="eliminarBeneficiario()"
+></confirm-dialog>

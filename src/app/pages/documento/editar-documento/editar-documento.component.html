@@ -1,0 +1,14 @@
+<h3 class="mb-3">Editar Documento</h3>
+@if(documentoEditar(); as documento){
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-6">
+            <formulario-documento [documento]="documento"
+                (documentoOutput)="guardarDocumentoEditado($event)"
+                (cancelarEvent)="cancelar()"></formulario-documento>
+        </div>
+    </div>
+</div>
+}@else{
+<h2 class="m-3">Documento no encontrado</h2>
+}

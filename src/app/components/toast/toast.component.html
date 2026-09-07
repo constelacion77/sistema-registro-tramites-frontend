@@ -1,0 +1,25 @@
+@if(notificacion()?.visible){
+    <div class="toast show position-fixed bottom-0 end-0 translate-large-x m-4" role="alert"
+    style="z-index: 1100;">
+        <div class="toast-header text-white" [ngClass]="{
+            'bg-success': notificacion()?.type === 'success',
+            'bg-danger': notificacion()?.type === 'danger',
+            'bg-warning': notificacion()?.type === 'warning',
+            'bg-info': notificacion()?.type === 'info'
+        }">
+            <strong class="me-auto">
+                {{notificacion()?.title}}
+            </strong>
+            <button type="button" class="btn-close btn-close-white" (click)="notificacionService.close()">
+            </button>
+        </div>
+        <div class="toast-body" [ngClass]="({
+            'text-success' : notificacion()?.type === 'success',
+            'text-danger' : notificacion()?.type === 'danger',
+            'text-warning' : notificacion()?.type === 'warning',
+            'text-info' : notificacion()?.type === 'info'
+        })">
+            {{notificacion()?.message}}
+        </div>
+    </div>
+}

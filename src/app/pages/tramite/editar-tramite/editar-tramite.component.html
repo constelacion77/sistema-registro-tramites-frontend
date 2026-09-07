@@ -1,0 +1,6 @@
+<h3 class="mb-3">Editar Tramite</h3>
+@if(tramite(); as tramite){
+    <formulario-tramite [tramite]="tramite" (tramiteOutput)="guardarTramite($event)"></formulario-tramite>
+}@else{
+    <div>Tramite no encontrado</div>
+}

@@ -1,0 +1,16 @@
+<h3 class="mb-3">Editar beneficiario</h3>
+@if(beneficiario(); as beneficiario){
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <formulario-beneficiario 
+                    [beneficiario]="beneficiario" 
+                    (beneficiarioOutput)="guardarBeneficiario($event)"
+                    (cancelarEvent)="cancelar()">
+                </formulario-beneficiario>
+            </div>
+        </div>
+    </div>
+}@else{
+<div>Beneficiario no encontrado.</div>
+}

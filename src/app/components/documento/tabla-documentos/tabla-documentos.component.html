@@ -1,0 +1,39 @@
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody class="table-light">
+        @for(doc of documentos(); track doc.id) {
+            <tr>
+                <th>{{doc.nombre}}</th>
+                <th>${{doc.costo}}</th>
+                <th>{{doc.descripcion}}</th>
+                <th>
+                    <div class="d-grid d-md-flex justify-content-start gap-2">
+                        <button type="button" (click)="editarDocumento(doc.id)"
+                        class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#confirmDialog"
+                        (click)="idDocumento.set(doc.id)"
+                        class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                    </div>
+                </th>
+            </tr>
+        }@empty{
+            <tr>
+                <td class="text-center" colspan="4">
+                    No hay documentos para mostrar.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<confirm-dialog
+    [titulo]="'Eliminar'"
+    [mensaje]="'¿Estás seguro de eliminar este documento?'"
+    (confirmation)="eliminarDocumento()"
+></confirm-dialog>
