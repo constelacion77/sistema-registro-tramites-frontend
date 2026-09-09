@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { environment } from '../../environments/environments.development';
+import { environment } from '../../environments/environment';
 import { NavegacionService } from '../navegacion/navegacion.service';
 import { TramiteResponse } from '../../classes/tramiteResponse';
 import { TramiteRequest } from '../../classes/tramiteRequest';
