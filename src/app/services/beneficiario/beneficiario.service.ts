@@ -1,10 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Beneficiario } from '../../classes/beneciario';
-import { environment } from '../../environments/environments.development';
+import { environment } from '../../environments/environment';
 import { NavegacionService } from '../navegacion/navegacion.service';
 import { NotificacionService } from '../notificacion/notificacion.service';
-import { ErrorResponse } from '../../models/error-response';
 import { Observable } from 'rxjs';
 import { Page } from '../../models/page';
 import { OpcionSelect } from '../../interfaces/opcion-select';
@@ -27,14 +26,6 @@ export class BeneficiarioService {
         }
       }
     );
-    // .subscribe({
-    //   next: (resp) => {
-    //     this.beneficiarios.set(resp);
-    //   },
-    //   error: (error) =>{
-    //     console.log(error);
-    //   }
-    // })
   }
 
   public obtenerOpcionesBeneficiario():Observable<OpcionSelect[]>{
@@ -43,16 +34,6 @@ export class BeneficiarioService {
 
   public guardarNuevoBeneficiario(beneficiario:Beneficiario):Observable<Beneficiario>{
     return this.http.post<Beneficiario>(`${environment.apiUrl}/beneficiarios`,beneficiario);
-    // .subscribe({
-    //   next: (resp) =>{
-    //     this.navegacionService.reedirigirA(['dashboard/beneficiarios']);
-    //     this.notificacionService.success('Información guardada correctamente');
-    //   },
-    //   error: (error: HttpErrorResponse) =>{
-    //     const respuesta = error.error as ErrorResponse;
-    //     this.notificacionService.danger(respuesta.message);
-    //   }
-    // })
   }
   
   public guardarBeneficiarioEditado(beneficiario:Beneficiario):void{
@@ -74,14 +55,5 @@ export class BeneficiarioService {
 
   public eliminarBeneficiario(idBeneficiario:number):Observable<Object>{
     return this.http.delete(`${environment.apiUrl}/beneficiarios/${idBeneficiario}`);
-    // .subscribe({
-    //   next: (resp) =>{
-    //     // this.obtenerBeneficiarios();
-    //     this.notificacionService.success('Información eliminada correctamente');
-    //   },
-    //   error: (error) =>{
-    //     console.log(error);
-    //   }
-    // })
   }
 }
