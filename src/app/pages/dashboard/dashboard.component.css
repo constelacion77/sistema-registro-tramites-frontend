@@ -43,3 +43,17 @@
   bottom: 0;
   background-image: linear-gradient(to top, #212529, transparent);
 }
+
+.container-vertical{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+}
+
+.container-center{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}

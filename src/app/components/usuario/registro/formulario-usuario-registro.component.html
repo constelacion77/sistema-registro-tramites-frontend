@@ -1,0 +1,50 @@
+<form [formGroup]="formRegistro">
+    <div class="mb-3">
+        <label class="lead" for="usernameRegistro">Usuario:</label>
+        <input type="text" class="form-control" id="usernameRegistro" formControlName="username" [class.is-invalid]="
+                        formRegistro.controls.username.invalid &&
+                        formRegistro.controls.username.touched
+                    " />
+        <div class="invalid-feedback">
+            @if(formRegistro.controls.username.errors?.['required']){
+            <div>El usuario es obligatorio.</div>
+            }
+            @if(formRegistro.controls.username.errors?.['minlength']){
+            <div>Debe tener al menos 3 caracteres.</div>
+            }
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="lead" for="emailRegistro">Correo:</label>
+        <input type="email" class="form-control" id="emailRegistro" formControlName="email" [class.is-invalid]="
+                        formRegistro.controls.email.invalid &&
+                        formRegistro.controls.email.touched
+                    " />
+        <div class="invalid-feedback">
+            @if(formRegistro.controls.email.errors?.['required']){
+            <div>El correo es obligatorio.</div>
+            }
+            @if(formRegistro.controls.email.errors?.['email']){
+            <div>Ingresa un correo válido.</div>
+            }
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="lead" for="passwordRegistro">Contraseña:</label>
+        <input type="password" class="form-control" id="passwordRegistro" formControlName="password" [class.is-invalid]="
+                        formRegistro.controls.password.invalid &&
+                        formRegistro.controls.password.touched
+                    " />
+        <div class="invalid-feedback">
+            @if(formRegistro.controls.password.errors?.['required']){
+            <div>La contraseña es obligatoria.</div>
+            }
+            @if(formRegistro.controls.password.errors?.['minlength']){
+            <div>Debe tener al menos 6 caracteres.</div>
+            }
+        </div>
+    </div>
+    <div class="d-grid">
+        <button type="button" class="btn btn-primary" (click)="validarRegistro()">Registrarse</button>
+    </div>
+</form>
