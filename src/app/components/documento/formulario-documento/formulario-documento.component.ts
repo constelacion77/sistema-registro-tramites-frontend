@@ -1,7 +1,6 @@
 import { Component, effect, inject, input, output } from '@angular/core';
 import { Documento } from '../../../classes/documento';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavegacionService } from '../../../services/navegacion/navegacion.service';
 
 @Component({
   selector: 'formulario-documento',
@@ -11,7 +10,6 @@ import { NavegacionService } from '../../../services/navegacion/navegacion.servi
 export class FormularioDocumentoComponent {
   public documento = input.required<Documento>();
   public documentoOutput = output<Documento>();
-  private navegacionService = inject(NavegacionService);
   public cancelarEvent = output<void>();
 
   private fb = inject(NonNullableFormBuilder);

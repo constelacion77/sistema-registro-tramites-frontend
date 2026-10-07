@@ -1,0 +1,29 @@
+<form [formGroup]="formLogin">
+    <div class="mb-3">
+        <label class="lead" for="usernameLogin">Usuario:</label>
+        <input type="text" class="form-control" id="userNameLogin" formControlName="userName" [class.is-invalid]="
+                        formLogin.controls.userName.invalid &&
+                        formLogin.controls.userName.touched
+                    " />
+        <div class="invalid-feedback">
+            @if(formLogin.controls.userName.errors?.['required']){
+            <div>El usuario es obligatorio.</div>
+            }
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="lead" for="passwordLogin">Contraseña:</label>
+        <input type="password" class="form-control" id="passwordLogin" formControlName="password" [class.is-invalid]="
+                        formLogin.controls.password.invalid &&
+                        formLogin.controls.password.touched
+                    " />
+        <div class="invalid-feedback">
+            @if(formLogin.controls.password.errors?.['required']){
+            <div>La contraseña es obligatoria.</div>
+            }
+        </div>
+    </div>
+    <div class="d-grid">
+        <button type="button" class="btn btn-primary" (click)="validarLogin()">Entrar</button>
+    </div>
+</form>
