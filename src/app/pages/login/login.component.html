@@ -4,15 +4,15 @@
             <div class="card-body p-4">
                 <h3 class="text-center mb-4">Iniciar sesión</h3>
                 <loading-spinner></loading-spinner>
-                @if(error){
-                <div class="alert alert-danger py-2" role="alert">
-                    {{ error }}
-                </div>
+                @if(error()){
+                    <div class="alert alert-danger py-2" role="alert">
+                        {{ error() }}
+                    </div>
                 }
                 <formulario-usuario-login (loginOutput)="iniciarSesion($event)"></formulario-usuario-login>
-                <!-- <p class="text-center mt-3 mb-0">
+                <p class="text-center mt-3 mb-0">
                     ¿No tienes cuenta? <a routerLink="/registro">Regístrate</a>
-                </p> -->                
+                </p>                
             </div>
         </div>
     </div>

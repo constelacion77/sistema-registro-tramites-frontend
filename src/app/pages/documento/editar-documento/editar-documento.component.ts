@@ -6,10 +6,11 @@ import { DocumentoService } from '../../../services/documento/documento.service'
 import { Documento } from '../../../classes/documento';
 import { FormularioDocumentoComponent } from "../../../components/documento/formulario-documento/formulario-documento.component";
 import { NavegacionService } from '../../../services/navegacion/navegacion.service';
+import { CardMessageComponent } from '../../../components/card-message/card-message.component';
 
 @Component({
   selector: 'app-editar-documento.component',
-  imports: [FormularioDocumentoComponent],
+  imports: [FormularioDocumentoComponent, CardMessageComponent],
   templateUrl: './editar-documento.component.html',
 })
 export default class EditarDocumentoComponent {

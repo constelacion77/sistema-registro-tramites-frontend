@@ -24,7 +24,6 @@ export class FormularioUsuarioLoginComponent {
     }
     
     const usuario = this.formLogin.getRawValue();
-    console.log("Usuario>>> ", usuario);
     this.loginOutput.emit(usuario);
   }
 }

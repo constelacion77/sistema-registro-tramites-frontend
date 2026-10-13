@@ -6,10 +6,11 @@ import { BeneficiarioService } from '../../../services/beneficiario/beneficiario
 import { Beneficiario } from '../../../classes/beneciario';
 import { FormularioBeneficiarioComponent } from "../../../components/beneficiario/formulario-beneficiario/formulario-beneficiario.component";
 import { NavegacionService } from '../../../services/navegacion/navegacion.service';
+import { CardMessageComponent } from '../../../components/card-message/card-message.component';
 
 @Component({
   selector: 'app-editar-beneficiario.component',
-  imports: [FormularioBeneficiarioComponent],
+  imports: [FormularioBeneficiarioComponent, CardMessageComponent],
   templateUrl: './editar-beneficiario.component.html',
 })
 export default class EditarBeneficiarioComponent {

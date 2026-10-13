@@ -3,6 +3,7 @@ import { NavegacionService } from '../../../services/navegacion/navegacion.servi
 import { TramiteService } from '../../../services/tramite/tramite.service';
 import { ConfirmDialogComponent } from "../../confirm-dialog/confirm-dialog.component";
 import { TramiteResponse } from '../../../classes/tramiteResponse';
+import { AuthService } from '../../../services/autenticacion/auth.service';
 
 @Component({
   selector: 'tabla-tramite',
@@ -15,6 +16,7 @@ export class TablaTramiteComponent {
   public idTramite = signal<number>(0);
   public TramiteService = inject(TramiteService);
   public idTramiteEliminar = output<number>();
+  public authService = inject(AuthService);
 
   public editarTramite(idTramite:number):void{
     this.nevegacionService.reedirigirA(['/dashboard/editar-tramite', idTramite]);
@@ -23,7 +25,6 @@ export class TablaTramiteComponent {
   public eliminarTramite():void{
     if(this.idTramite() === 0) return;
     this.idTramiteEliminar.emit(this.idTramite());
-    // this.TramiteService.eliminarTramite(this.idTramite());
     this.idTramite.set(0);
   }
 }

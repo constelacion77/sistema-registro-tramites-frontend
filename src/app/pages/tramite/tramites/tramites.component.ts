@@ -5,6 +5,7 @@ import { TablaTramiteComponent } from "../../../components/tramite/tabla-tramite
 import { PaginacionService } from '../../../services/paginacion/paginacion.service';
 import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 import { PaginadorComponent } from "../../../components/paginador/paginador.component";
+import { AuthService } from '../../../services/autenticacion/auth.service';
 
 @Component({
   selector: 'app-tramites.component',
@@ -16,6 +17,7 @@ export default class TramitesComponent {
   public tramiteService = inject(TramiteService);
   private paginadorService = inject(PaginacionService);
   private notificacionService = inject(NotificacionService);
+  public authService = inject(AuthService);
 
   public nuevoTramite():void{
     this.navegacionService.reedirigirA(['dashboard/nuevo-tramite'])

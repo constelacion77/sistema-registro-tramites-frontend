@@ -5,6 +5,7 @@ import { TablaBeneficiarioComponent } from "../../../components/beneficiario/tab
 import { PaginacionService } from '../../../services/paginacion/paginacion.service';
 import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 import { PaginadorComponent } from "../../../components/paginador/paginador.component";
+import { MessageService } from '../../../services/message/message.service';
 
 @Component({
   selector: 'app-beneficiarios.component',
@@ -38,7 +39,6 @@ export default class BeneficiariosComponent {
         
       },
       error: (error) =>{
-        console.log(error);
       }
     })
   }

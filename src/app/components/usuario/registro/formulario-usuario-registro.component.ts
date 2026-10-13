@@ -13,7 +13,7 @@ export class FormularioUsuarioRegistroComponent {
   private fb = inject(NonNullableFormBuilder);
 
   public formRegistro = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(3)]],
+    userName: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
@@ -24,6 +24,8 @@ export class FormularioUsuarioRegistroComponent {
       return;
     }
 
-    this.registroOutput.emit(this.formRegistro.getRawValue());
+    const usuario = this.formRegistro.getRawValue();
+
+    this.registroOutput.emit(usuario);
   }
 }
