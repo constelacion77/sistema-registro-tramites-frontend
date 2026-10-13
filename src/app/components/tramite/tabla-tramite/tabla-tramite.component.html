@@ -3,8 +3,10 @@
         <tr>
             <th>Documento</th>
             <th>Beneficiario</th>
+            @if(authService.esAdmin()) {
             <th>Folio</th>
             <th>Acciones</th>
+            }
         </tr>
     </thead>
     <tbody class="table-light">
@@ -12,6 +14,7 @@
             <tr>
                 <th>{{tra.idDocumento.nombre}}</th>
                 <th>{{tra.idBeneficiario.nombre}} {{tra.idBeneficiario.apellidos}}</th>
+                @if(authService.esAdmin()) {
                 <th>{{tra.folio}}</th>
                 <th>
                     <div class="d-grid d-md-flex justify-content-start gap-2">
@@ -21,6 +24,7 @@
                         class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
                     </div>
                 </th>
+                }
             </tr>
         }@empty{
             <tr>

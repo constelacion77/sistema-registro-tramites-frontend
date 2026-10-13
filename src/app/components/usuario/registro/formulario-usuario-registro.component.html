@@ -1,15 +1,15 @@
 <form [formGroup]="formRegistro">
     <div class="mb-3">
-        <label class="lead" for="usernameRegistro">Usuario:</label>
-        <input type="text" class="form-control" id="usernameRegistro" formControlName="username" [class.is-invalid]="
-                        formRegistro.controls.username.invalid &&
-                        formRegistro.controls.username.touched
+        <label class="lead" for="userNameRegistro">Usuario:</label>
+        <input type="text" class="form-control" id="userNameRegistro" formControlName="userName" [class.is-invalid]="
+                        formRegistro.controls.userName.invalid &&
+                        formRegistro.controls.userName.touched
                     " />
         <div class="invalid-feedback">
-            @if(formRegistro.controls.username.errors?.['required']){
+            @if(formRegistro.controls.userName.errors?.['required']){
             <div>El usuario es obligatorio.</div>
             }
-            @if(formRegistro.controls.username.errors?.['minlength']){
+            @if(formRegistro.controls.userName.errors?.['minlength']){
             <div>Debe tener al menos 3 caracteres.</div>
             }
         </div>

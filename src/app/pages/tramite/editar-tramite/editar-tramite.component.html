@@ -2,5 +2,6 @@
 @if(tramite(); as tramite){
     <formulario-tramite [tramite]="tramite" (tramiteOutput)="guardarTramite($event)"></formulario-tramite>
 }@else{
-    <div>Tramite no encontrado</div>
+    <card-message [title]="'Error'" [message]="'Tramite no encontrado.'"></card-message>
+    <!-- <div>Tramite no encontrado</div> -->
 }

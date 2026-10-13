@@ -11,7 +11,7 @@ export class AuthService {
   private tokenKey = 'auth_token';
   private http = inject(HttpClient);
 
-  public registro (datos:{username: string, email: string, password: string}):Observable<AuthResponse>{
+  public registro (datos:{userName: string, email: string, password: string}):Observable<AuthResponse>{
     return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/registro`,datos)
     .pipe(
       tap(resp => this.guardarSesion(resp))
@@ -21,7 +21,9 @@ export class AuthService {
   public login (datos:{userName: string, password: string}):Observable<AuthResponse>{
     return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`,datos)
     .pipe(
-      tap(resp => this.guardarSesion(resp))
+    tap(resp => {
+        this.guardarSesion(resp)
+        console.log("Rol:::: ", resp.rol)})
     );
   }
 
@@ -39,5 +41,10 @@ export class AuthService {
 
   private guardarSesion(resp:AuthResponse):void{
     localStorage.setItem(this.tokenKey, resp.token);
+    localStorage.setItem("rol", resp.rol);
+  }
+
+  public esAdmin():boolean{
+    return localStorage.getItem('rol') === 'ADMIN';
   }
 }

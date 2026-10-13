@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/autenticacion/auth.service';
 import { NotificacionService } from '../../services/notificacion/notificacion.service';
 import { NavegacionService } from '../../services/navegacion/navegacion.service';
@@ -18,16 +18,16 @@ export default class LoginComponent {
   private notificacionService = inject(NotificacionService);
   private navegacionService = inject(NavegacionService);
 
-  public error = '';
+  public error = signal<string>('');
 
   public iniciarSesion(credenciales: Credenciales): void {
     this.authService.login(credenciales).subscribe({
       next: () => {
         this.navegacionService.navegarATramites();
-        this.notificacionService.success("Sesión iniciada correctamente");
+        this.notificacionService.success("Sesión iniciada correctamente.");
       },
       error: (error) => {
-        this.error = error.error?.error || 'Error al iniciar sesión';
+        this.error.set(error.error?.error || 'Error al iniciar sesión');
         console.log(error);
       }
     });

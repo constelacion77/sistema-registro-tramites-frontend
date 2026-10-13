@@ -7,9 +7,11 @@
                 <a class="nav-link" routerLink="/dashboard/tramites" routerLinkActive="active">
                     Tramites
                 </a>
-                <a class="nav-link" routerLink="/dashboard/beneficiarios" routerLinkActive="active">
-                    Beneficarios
-                </a>
+                @if (authService.esAdmin()) {
+                    <a class="nav-link" routerLink="/dashboard/beneficiarios" routerLinkActive="active">
+                        Beneficarios
+                    </a>
+                }
                 <a class="nav-link" routerLink="/dashboard/documentos" routerLinkActive="active">
                     Documentos
                 </a>
