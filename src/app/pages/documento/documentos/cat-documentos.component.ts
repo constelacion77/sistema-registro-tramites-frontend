@@ -5,6 +5,7 @@ import { NavegacionService } from '../../../services/navegacion/navegacion.servi
 import { PaginacionService } from '../../../services/paginacion/paginacion.service';
 import { PaginadorComponent } from "../../../components/paginador/paginador.component";
 import { NotificacionService } from '../../../services/notificacion/notificacion.service';
+import { AuthService } from '../../../services/autenticacion/auth.service';
 
 @Component({
   selector: 'app-cat-documentos.component',
@@ -16,6 +17,7 @@ export default class CatDocumentosComponent {
   private navegacionService = inject(NavegacionService);
   public paginacionService = inject(PaginacionService);
   private notificacionService = inject(NotificacionService);
+  public authService = inject(AuthService);
 
   constructor(){
     this.documentosService.documentos.set([]);
