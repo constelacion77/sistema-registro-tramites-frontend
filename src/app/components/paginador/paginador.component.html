@@ -1,7 +1,6 @@
 <nav aria-label="Paginador" class="paginador">
-    <div class="">
-        <!-- <span>Registro por pagina:</span> -->
-        <select class="form-select" [value]="paginacionService.tamanioPagina()" (change)="cambiarTamanioPagina($event)">
+    <div>
+        <select class="form-select select" [value]="paginacionService.tamanioPagina()" (change)="cambiarTamanioPagina($event)">
             <option [value]="5">5</option>
             <option [value]="10">10</option>
             <option [value]="20">20</option>

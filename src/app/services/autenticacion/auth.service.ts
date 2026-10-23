@@ -23,7 +23,7 @@ export class AuthService {
     .pipe(
     tap(resp => {
         this.guardarSesion(resp)
-        console.log("Rol:::: ", resp.rol)})
+      })
     );
   }
 
