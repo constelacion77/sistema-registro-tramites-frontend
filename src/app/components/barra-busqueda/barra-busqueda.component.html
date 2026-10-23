@@ -1,0 +1,7 @@
+<div class="input-group">
+    <input id="input-busqueda" type="text" class="form-control input-busqueda"
+        placeholder="Busca por nombre, documento, beneficiario o descripción..." 
+        [(ngModel)]="parametro" #txtSearxh (keyup.enter)="buscar()">
+        <button class="btn btn-dark" type="button" id="button-search"
+        (click)="buscar()">Buscar</button>
+</div>

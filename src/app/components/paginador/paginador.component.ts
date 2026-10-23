@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, computed, effect, inject, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { PaginacionService } from '../../services/paginacion/paginacion.service';
 import { CommonModule } from '@angular/common';
 

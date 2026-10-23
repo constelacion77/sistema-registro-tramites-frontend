@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BeneficiarioService } from '../../../services/beneficiario/beneficiario.service';
 import { NavegacionService } from '../../../services/navegacion/navegacion.service';
 import { TablaBeneficiarioComponent } from "../../../components/beneficiario/tabla-beneficiario/tabla-beneficiario.component";
@@ -6,10 +6,12 @@ import { PaginacionService } from '../../../services/paginacion/paginacion.servi
 import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 import { PaginadorComponent } from "../../../components/paginador/paginador.component";
 import { MessageService } from '../../../services/message/message.service';
+import { BarraBusquedaComponent } from '../../../components/barra-busqueda/barra-busqueda.component';
+import { FiltroBusqueda, filtroVacio } from '../../../interfaces/filtroBusqueda';
 
 @Component({
   selector: 'app-beneficiarios.component',
-  imports: [TablaBeneficiarioComponent, PaginadorComponent],
+  imports: [TablaBeneficiarioComponent, PaginadorComponent, BarraBusquedaComponent],
   templateUrl: './beneficiarios.component.html',
 })
 export default class BeneficiariosComponent {
@@ -17,6 +19,7 @@ export default class BeneficiariosComponent {
   private navegacionService = inject(NavegacionService);
   public paginacionService = inject(PaginacionService);
   private notificacionService = inject(NotificacionService);
+  private filtroBusqueda = signal<FiltroBusqueda>(filtroVacio());
 
   public nuevoBeneficiario():void{
     this.navegacionService.reedirigirA(['dashboard/nuevo-beneficiario']);
@@ -28,9 +31,10 @@ export default class BeneficiariosComponent {
   }
 
   public obtenerBeneficiarios():void{
-    this.beneficiarioService.obtenerBeneficiarios(
+    this.beneficiarioService.buscarBeneficiariosPorParametros(
       this.paginacionService.paginaActual(),
-      this.paginacionService.tamanioPagina()
+      this.paginacionService.tamanioPagina(),
+      this.filtroBusqueda()
     )
     .subscribe({
       next: (resp) => {
@@ -51,6 +55,26 @@ export default class BeneficiariosComponent {
         this.notificacionService.success('Información eliminada correctamente.');
       },
       error: (error) =>{
+        console.log(error);
+      }
+    })
+  }
+
+  public buscarBeneficiarios(busqueda:string):void{
+    const filtro:FiltroBusqueda = {busqueda};
+    this.filtroBusqueda.set(filtro);
+    this.paginacionService.irAPagina(0);
+    
+    this.beneficiarioService.buscarBeneficiariosPorParametros(
+      this.paginacionService.paginaActual(),
+      this.paginacionService.tamanioPagina(),
+      filtro
+    ).subscribe({
+      next: resp =>{
+        this.beneficiarioService.beneficiarios.set(resp.content);
+        this.paginacionService.actualizarRespuesta(resp);
+      },
+      error: error =>{
         console.log(error);
       }
     })

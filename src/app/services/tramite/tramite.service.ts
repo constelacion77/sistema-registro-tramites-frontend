@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { NavegacionService } from '../navegacion/navegacion.service';
@@ -7,6 +7,8 @@ import { TramiteRequest } from '../../classes/tramiteRequest';
 import { catchError, Observable, of } from 'rxjs';
 import { NotificacionService } from '../notificacion/notificacion.service';
 import { Page } from '../../models/page';
+import { FiltroBusqueda } from '../../interfaces/filtroBusqueda';
+import { construirParametros } from '../../utils/paramsContructor';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +18,6 @@ export class TramiteService {
   public tramites = signal<TramiteResponse[]>([]);
   private navegacionService = inject(NavegacionService);
   private notificacionService = inject(NotificacionService);
-  
-  public obtenerTramites(page:number, size:number): Observable<Page<TramiteResponse>>{
-    return this.http.get<Page<TramiteResponse>>(`${environment.apiUrl}/tramites`,{
-      params:{
-        page: page,
-        size: size
-      }
-    });
-  }
 
   public guardarNuevoTramite(tramite:TramiteRequest):void{
     this.http.post(`${environment.apiUrl}/tramites`,tramite).subscribe({
@@ -61,14 +54,10 @@ export class TramiteService {
 
   public eliminarTramite(idTramite:number):Observable<Object>{
     return this.http.delete(`${environment.apiUrl}/tramites/${idTramite}`);
-    // .subscribe({
-    //   next: (resp) =>{
-    //     // this.obtenerTramites();
-    //     this.notificacionService.success('Información eliminada correctamente');
-    //   },
-    //   error: (error) =>{
-    //     console.log(error);
-    //   }
-    // })
+  }
+
+  public busquedaTramitesPorCampos(page:number, size:number, busqueda:FiltroBusqueda):Observable<Page<TramiteResponse>>{
+    const params = construirParametros(busqueda, page, size);
+    return this.http.get<Page<TramiteResponse>>(`${environment.apiUrl}/tramites/busqueda`,{params});
   }
 }
