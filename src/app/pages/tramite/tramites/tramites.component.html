@@ -1,10 +1,17 @@
-<div class="d-flex justify-content-start mb-3 gap-2">
-    <h3>Tramites</h3>
-    @if (authService.esAdmin()) {
-        <button class="btn btn-outline-success" (click)="nuevoTramite()">
-            <i class="bi bi-plus-lg"></i>
-        </button>
-    }
+<div class="d-grid mb-3">
+    <div class="row">
+        <div class="col-4 d-flex justify-content-start gap-2">
+            <h3>Tramites</h3>
+            @if (authService.esAdmin()) {
+                <button class="btn btn-outline-success" (click)="nuevoTramite()">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            }
+        </div>
+        <div class="col-8">
+            <barra-busqueda (busqueda)="busquedaTramites($event)"></barra-busqueda>
+        </div>
+    </div>
 </div>
 <tabla-tramite [tramites]="tramiteService.tramites()" 
 (idTramiteEliminar)="eliminarTramite($event)"></tabla-tramite>

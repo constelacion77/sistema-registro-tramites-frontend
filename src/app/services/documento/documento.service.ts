@@ -7,6 +7,8 @@ import { NotificacionService } from '../notificacion/notificacion.service';
 import { Observable } from 'rxjs';
 import { Page } from '../../models/page';
 import { OpcionSelect } from '../../interfaces/opcion-select';
+import { construirParametros } from '../../utils/paramsContructor';
+import { FiltroBusqueda } from '../../interfaces/filtroBusqueda';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +18,6 @@ export class DocumentoService {
   public documentos = signal<Documento[]>([]);
   private navigacionService = inject(NavegacionService);
   private notificacionService = inject(NotificacionService);
-  
-  public cargarDocumentos(page:number, size:number):Observable<Page<Documento>>{
-    return this.http.get<Page<Documento>>(`${environment.apiUrl}/documentos`,
-      {
-        params:{
-          page: page,
-          size: size
-        }
-      }
-    );
-  }
 
   public obtenerOpcionesDocumento():Observable<OpcionSelect[]>{
     return this.http.get<OpcionSelect[]>(`${environment.apiUrl}/documentos/opciones`);
@@ -54,5 +45,10 @@ export class DocumentoService {
 
   public obtenerDocumentoPorId(idDocumento:number):Documento | undefined{
     return this.documentos().find(e => e.id === idDocumento);
+  }
+
+  public buscarPorParametro(page:number,size:number,filtro:FiltroBusqueda):Observable<Page<Documento>>{
+    const params = construirParametros(filtro,page,size);
+    return this.http.get<Page<Documento>>(`${environment.apiUrl}/documentos/buscaqueda`,{params});
   }
 }

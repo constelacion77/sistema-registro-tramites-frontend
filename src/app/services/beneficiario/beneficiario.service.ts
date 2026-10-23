@@ -7,6 +7,8 @@ import { NotificacionService } from '../notificacion/notificacion.service';
 import { Observable } from 'rxjs';
 import { Page } from '../../models/page';
 import { OpcionSelect } from '../../interfaces/opcion-select';
+import { construirParametros } from '../../utils/paramsContructor';
+import { FiltroBusqueda } from '../../interfaces/filtroBusqueda';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +18,6 @@ export class BeneficiarioService {
   public beneficiarios = signal<Beneficiario[]>([])
   private navegacionService = inject(NavegacionService);
   private notificacionService = inject(NotificacionService);
-
-  public obtenerBeneficiarios(page:number, size:number):Observable<Page<Beneficiario>>{
-    return this.http.get<Page<Beneficiario>>(`${environment.apiUrl}/beneficiarios`,
-      {
-        params:{
-          page: page,
-          size: size
-        }
-      }
-    );
-  }
 
   public obtenerOpcionesBeneficiario():Observable<OpcionSelect[]>{
     return this.http.get<OpcionSelect[]>(`${environment.apiUrl}/beneficiarios/opciones`);
@@ -55,5 +46,10 @@ export class BeneficiarioService {
 
   public eliminarBeneficiario(idBeneficiario:number):Observable<Object>{
     return this.http.delete(`${environment.apiUrl}/beneficiarios/${idBeneficiario}`);
+  }
+
+  public buscarBeneficiariosPorParametros(page:number,size:number,filtroBusqueda:FiltroBusqueda):Observable<Page<Beneficiario>>{
+    const params = construirParametros(filtroBusqueda,page,size);
+    return this.http.get<Page<Beneficiario>>(`${environment.apiUrl}/beneficiarios/busqueda`,{params});
   }
 }
