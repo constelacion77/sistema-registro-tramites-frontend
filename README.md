@@ -10,3 +10,6 @@ mediante DTOs y formularios reactivos con componentes reutilizables.
 
 ## Qué mejoraría
 Tests de integración y despliegue con Docker.
+
+## Vista
+Puedes verlo tu mismo en el siguiente link: 
